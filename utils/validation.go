@@ -3,6 +3,7 @@ package utils
 import (
 	"regexp"
 	"strings"
+	"fmt"
 )
 
 func IsOnion(identifier string) bool {
