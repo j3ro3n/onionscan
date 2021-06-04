@@ -5,7 +5,7 @@ import time
 
 shodan_client = shodan.Shodan("Jn8pe7BoQ6jHKoKyAznELfsoGtlSNlVy")
 
-file_list = glob.glob("onionscan_results/*.json")
+file_list = glob.glob("/data/onionscan_results/*.json")
 
 ssh_key_list = []
 key_to_hosts = {}
