@@ -123,11 +123,11 @@ def process_results(onion,json_response):
 	global session_onions
 
 	# create our output folder if necessary
-	if not os.path.exists("onionscan_results"):
-		os.mkdir("onionscan_results")
+	if not os.path.exists("/data/onionscan_results"):
+		os.mkdir("/data/onionscan_results")
 
 	# write out the JSON results of the scan
-	with open("%s/%s.json" % ("onionscan_results",onion), "wb") as fd:
+	with open("%s/%s.json" % ("/data/onionscan_results",onion), "wb") as fd:
 		fd.write(json_response)
 
 	# look for additional .onion domains to add to our scan list
@@ -187,7 +187,7 @@ while count < len(onions):
 	onion  = session_onions.pop()
 	
 	# test to see if we have already retrieved results for this onion
-	if os.path.exists("onionscan_results/%s.json" % onion):
+	if os.path.exists("/data/onionscan_results/%s.json" % onion):
 
 		print ("[!] Already retrieved %s. Skipping." % onion)
 		count += 1
