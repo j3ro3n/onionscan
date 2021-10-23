@@ -1,50 +1,58 @@
-import glob
-import json
-import shodan
 import time
 
-shodan_client = shodan.Shodan("Jn8pe7BoQ6jHKoKyAznELfsoGtlSNlVy")
+from lib.helpers import jsonize_file, get_file_list, get_shodan_client
 
-file_list = glob.glob("/data/onionscan_results/*.json")
 
-ssh_key_list = []
-key_to_hosts = {}
+def sshkey_to_hiddenservice():
+    """
+    Iterates through our list of files.  If our scan results contain an SSH Key, print friendly message.
+    If key_to_hosts dictionary already contains the SSH Key, add the current hidden service to the list stored in that key.
+    If the SSH Key isn't present in key_to_hosts, initialize the dictionary with a fresh list and add the hidden service.
 
-for json_file in file_list:
+    :return dict key_to_hosts:
+    """
+    key_to_hosts = {}
+    file_list = get_file_list()
 
-    with open(json_file,"rb") as fd:
-
-        scan_result = json.load(fd)
-
+    for json_file in file_list:
+        scan_result = jsonize_file(json_file)
         if scan_result['sshKey']:
-            print ("%s => %s" % (scan_result['hiddenService'],scan_result['sshKey']))
-            
-            if (scan_result['sshKey']) in key_to_hosts:
+            print(f"{scan_result['hiddenService']} => {scan_result['sshKey']}")
+
+            if scan_result['sshKey'] in key_to_hosts:
                 key_to_hosts[scan_result['sshKey']].append(scan_result['hiddenService'])
             else:
                 key_to_hosts[scan_result['sshKey']] = [scan_result['hiddenService']]
-            
-for ssh_key in key_to_hosts:
-    
-    if len(key_to_hosts[ssh_key]) > 1:
-        
-        print ("[!] SSH Key %s is used on multiple hidden services.") % ssh_key
-        
-        for key in key_to_hosts[ssh_key]:
-            
-            print ("\t%s") % key           
-    
-    while True:
-    
-        try:
-            
-            shodan_result = shodan_client.search(ssh_key)
-            break
-        except:
-            time.sleep(5)
-            pass
-        
-    if shodan_result['total'] > 0:
-        
-        for hit in shodan_result['matches']:
-            print ("[!] Hit for %s on %s for hidden services %s" % (ssh_key,hit['ip_str'],",".join(key_to_hosts[ssh_key])))
+    return key_to_hosts
+
+
+def sshkey_shodan_search(key_to_hosts: dict):
+    """
+    Takes the key_to_hosts dictionary and iterates through each SSH Key to check if that SSH Key is found with Shodan.
+
+    :param dict key_to_hosts:
+    """
+    shodan_client = get_shodan_client()
+    for ssh_key in key_to_hosts:
+        if len(key_to_hosts[ssh_key]) > 1:
+            print(f"[!] SSH Key {ssh_key} is used on multiple hidden services.")
+            for key in key_to_hosts[ssh_key]:
+                print(f"\t{key}")
+
+        while True:
+            try:
+                shodan_result = shodan_client.search(ssh_key)
+                break
+            except:
+                time.sleep(5)
+                pass
+        if shodan_result['total'] > 0:
+            for hit in shodan_result['matches']:
+                print(f"[!] Hit for {ssh_key} on {hit['ip_str']} for hidden services {','.join(key_to_hosts[ssh_key])}")
+        else:
+            print(f"[!] No Shodan hits for {ssh_key}")
+
+if __name__ == "__main__":
+    sshkeys = sshkey_to_hiddenservice()
+    if sshkeys:
+        sshkey_shodan_search(sshkeys)
