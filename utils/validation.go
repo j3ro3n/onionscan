@@ -8,7 +8,7 @@ import (
 
 func IsOnion(identifier string) bool {
 	// TODO: At some point we will want to support i2p
-	if len(identifier) >= 62 && strings.HasSuffix(identifier, ".onion") {
+	if len(identifier) >= 22 && strings.HasSuffix(identifier, ".onion") {
 		isv2url, _ := regexp.MatchString(`(^|\.)[a-z2-7]{16}\.onion$`, identifier)
 		isv3url, _ := regexp.MatchString(`(^|\.)[a-z2-7]{56}\.onion$`, identifier)
 		return isv3url || isv2url
