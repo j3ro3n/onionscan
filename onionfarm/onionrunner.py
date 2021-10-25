@@ -65,7 +65,7 @@ def run_onionscan(onion):
     """
     print(f"[*] Onionscanning {onion}")
 
-    process = subprocess.Popen(["/home/onionfarm/go/bin/./onionscan", "-webport=0", "--jsonReport", "--simpleReport=false", onion],
+    process = subprocess.Popen(["onionscan", "-webport=0", "--jsonReport", "--simpleReport=false", onion],
                                stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
     process_timer = Timer(300, handle_timeout, args=[process, onion])

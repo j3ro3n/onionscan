@@ -5,9 +5,9 @@ import (
 	"crypto/sha1"
 	"encoding/hex"
 	"fmt"
-	"github.com/s-rah/onionscan/config"
-	"github.com/s-rah/onionscan/report"
-	"github.com/s-rah/onionscan/utils"
+	"github.com/je3o3n/onionscan/config"
+	"github.com/je3o3n/onionscan/report"
+	"github.com/je3o3n/onionscan/utils"
 )
 
 type FTPProtocolScanner struct {
