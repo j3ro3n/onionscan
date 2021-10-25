@@ -65,7 +65,7 @@ def run_onionscan(onion):
     """
     print(f"[*] Onionscanning {onion}")
 
-    process = subprocess.Popen(["onionscan", "-webport=0", "--jsonReport", "--simpleReport=false", onion],
+    process = subprocess.Popen(["/home/onionfarm/go/bin/./onionscan", "-webport=0", "--jsonReport", "--simpleReport=false", onion],
                                stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
     process_timer = Timer(300, handle_timeout, args=[process, onion])
@@ -206,7 +206,8 @@ def main():
         print(f"[*] Running {count:d} of {len(onions):d}.")
         onion = session_onions.pop()
         onion = onion.decode('utf8')
-        # test to see if we have already retrieved results for this onion
+        
+		# test to see if we have already retrieved results for this onion
         if os.path.exists(f"onionscan_results/{onion}.json"):
             print(f"[!] Already retrieved {onion}. Skipping.")
             count += 1
