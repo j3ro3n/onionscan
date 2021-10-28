@@ -1,8 +1,8 @@
 package protocol
 
 import (
-	"github.com/j3ro3n/onionscan/config"
-	"github.com/j3ro3n/onionscan/report"
+	"github.com/s-rah/onionscan/config"
+	"github.com/s-rah/onionscan/report"
 )
 
 type Scanner interface {

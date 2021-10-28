@@ -2,7 +2,7 @@ package steps
 
 import (
 	"fmt"
-	"github.com/j3ro3n/onionscan/report"
+	"github.com/s-rah/onionscan/report"
 	"log"
 	"os"
 	"time"

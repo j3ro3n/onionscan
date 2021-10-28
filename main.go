@@ -8,13 +8,13 @@ import (
 	"os"
 	"strings"
 
-	"github.com/j3ro3n/onionscan/config"
-	"github.com/j3ro3n/onionscan/deanonymization"
-	"github.com/j3ro3n/onionscan/onionscan"
-	"github.com/j3ro3n/onionscan/onionscan/steps"
-	"github.com/j3ro3n/onionscan/report"
-	"github.com/j3ro3n/onionscan/utils"
-	"github.com/j3ro3n/onionscan/webui"
+	"github.com/s-rah/onionscan/config"
+	"github.com/s-rah/onionscan/deanonymization"
+	"github.com/s-rah/onionscan/onionscan"
+	"github.com/s-rah/onionscan/onionscan/steps"
+	"github.com/s-rah/onionscan/report"
+	"github.com/s-rah/onionscan/utils"
+	"github.com/s-rah/onionscan/webui"
 	"golang.org/x/crypto/ssh/terminal"
 )
 

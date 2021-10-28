@@ -3,9 +3,9 @@ package spider
 import (
 	"crypto/tls"
 	"fmt"
-	"github.com/j3ro3n/onionscan/config"
-	"github.com/j3ro3n/onionscan/model"
-	"github.com/j3ro3n/onionscan/report"
+	"github.com/s-rah/onionscan/config"
+	"github.com/s-rah/onionscan/model"
+	"github.com/s-rah/onionscan/report"
 	"golang.org/x/net/proxy"
 	"net/http"
 	"net/http/cookiejar"
