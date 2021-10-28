@@ -12,7 +12,7 @@ import (
 	"github.com/s-rah/onionscan/deanonymization"
 	"github.com/s-rah/onionscan/onionscan"
 	"github.com/s-rah/onionscan/onionscan/steps"
-	"github.com/s-rah/onionscan/report"
+	"github.com/j3ro3n/onionscan/report"
 	"github.com/s-rah/onionscan/utils"
 	"github.com/s-rah/onionscan/webui"
 	"golang.org/x/crypto/ssh/terminal"
