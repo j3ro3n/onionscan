@@ -24,7 +24,7 @@ def get_onion_list():
     """
     Opens the onion_master_list that is specified in the pyonionscan.cfg file as onion_master_list.  This file can be
     downloaded from:
-    https://raw.githubusercontent.com/automatingosint/osint_public/master/onionrunner/onion_master_list.txt
+    https://raw.githubusercontent.com/j3ro3n/onionscan/master/onionfarm/onion_master_list.txt
 
     :return list stored_onions:
     """
@@ -147,7 +147,7 @@ def process_results(onion, json_response):
         fd.write(json_response)
 
     # look for additional .onion domains to add to our scan list
-    scan_result = f"{json_response.decode('utf8')}"
+    scan_result = f"{json_response.decode('utf-8-sig')}"
     scan_result = json.loads(scan_result)
 
     if scan_result['identifierReport']['linkedOnions'] is not None:
@@ -159,7 +159,7 @@ def process_results(onion, json_response):
     if scan_result['identifierReport']['relatedOnionServices'] is not None:
         add_new_onions(scan_result['identifierReport']['relatedOnionServices'])
 
-    return
+    return 
 
 
 def add_new_onions(new_onion_list):
