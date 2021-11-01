@@ -13,6 +13,6 @@ func IsOnion(identifier string) bool {
 		isv3url, _ := regexp.MatchString(`(^|\.)[a-z2-7]{56}\.onion$`, identifier)
 		return isv3url || isv2url
 	}
-	fmt.Printf("identifier %s was skipped", identifier)
+	//fmt.Printf("identifier %s was skipped", identifier)
 	return false
 }
